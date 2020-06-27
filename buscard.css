@@ -1,0 +1,222 @@
+$green: #a8ff78;
+
+$boxShadow: 0px 0px 24px 6px rgba(black, 0.08);
+
+@function gray($color){
+  @return rgb($color, $color, $color);
+}
+
+@mixin center {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+body{
+  margin: 0px;
+  overflow: hidden;
+  padding: 0px;
+  
+  h1, p, button, a {
+    font-family: "Roboto", sans-serif;
+    margin: 0px;
+    padding: 0px;
+  }
+}
+
+#app{
+  background-color: $green;
+  height: 100vh;
+  overflow: hidden;
+  width: 100vw;
+  
+  #cards-wrapper{
+    @include center;
+    padding: 50px;
+    
+    #cards{
+      height: 500px;
+      position: relative;
+      width: 1000px;
+      
+      .card-wrapper{
+        height: 400px;
+        position: absolute;
+        top: 50%;
+        transition: all 0.25s;
+        width: 280px;
+        
+        &:not(.selected):hover{
+          cursor: pointer;
+          
+          .card{
+            top: calc(50% - 50px);
+            
+            .icon{
+              i{
+                color: $green;
+              }
+            }
+          }
+        }
+        
+        &:first-child{
+          top: calc(50% + 50px);
+          transform: translateY(-50%) rotate(-10deg);
+        }
+        
+        &:nth-child(2){
+          top: calc(50% + 20px);
+          transform: translateY(-50%) rotate(-5deg);
+        }
+        
+        &:nth-child(3){
+          top: 50%;
+          transform: translateY(-50%) rotate(0deg);
+        }
+        
+        &:nth-child(4){
+          top: calc(50% + 20px);
+          transform: translateY(-50%) rotate(5deg);
+        }
+        
+        &:nth-child(5){
+          top: calc(50% + 50px);
+          transform: translateY(-50%) rotate(10deg);
+        }
+        
+        &.selected{
+          height: 800px;
+          top: 50%;
+          transform: translate(-50%, -50%) rotate(0deg);
+          width: 560px;
+          
+          .card{
+            height: 800px;
+            width: 560px;
+            
+            .icon{
+              top: 20px;
+              transform: translate(-50%, 0px);
+              
+              i{
+                color: $green;
+              }
+            }
+          }
+        }
+        
+        .card{
+          background-color: white;
+          border-radius: 20px;
+          box-shadow: $boxShadow;
+          height: 400px;
+          overflow: hidden;
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+          transition: all 0.25s;
+          width: 280px;
+          
+          .icon{
+            @include center;
+            text-align: center;
+            transition: all 0.25s;
+            
+            i{
+              color: gray(180);
+              font-size: 6em;
+              height: 150px;
+              line-height: 150px;
+              width: 150px;
+            }
+          }
+          
+          .content{
+            animation: fadeIn 1s;
+            margin-top: 170px;
+            
+            .title{
+              h1{
+                color: $green;
+                font-size: 3em;
+                font-weight: 300;
+                text-align: center;
+              }
+            }
+            
+            .text{
+              margin-top: 100px;
+              padding: 20px 40px;
+              
+              p{
+                color: gray(120);
+                font-size: 2em;
+                font-weight: 300;
+                text-align: center;
+              }
+            }
+            
+            .close-button{
+              background-color: white;
+              border: none;
+              border-radius: 100px;
+              bottom: 20px;
+              box-shadow: $boxShadow;
+              cursor: pointer;
+              height: 50px;
+              left: 50%;
+              outline: none;
+              padding: 0px;
+              position: absolute;
+              transform: translateX(-50%);
+              transition: all 0.25s;
+              width: 50px;
+              
+              &:hover,
+              &:focus{
+                bottom: 25px;
+                
+                i{
+                  color: $green;
+                }
+              }
+              
+              i{
+                color: gray(120);
+                font-size: 1.5em;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                width: 50px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  #youtube-link{
+    bottom: 0px;
+    color: gray(90);
+    font-size: 1.25em;
+    font-weight: 700;
+    margin: 20px;
+    position: fixed;
+    right: 0px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  
+  to {
+    opacity: 1;
+  }
+}
